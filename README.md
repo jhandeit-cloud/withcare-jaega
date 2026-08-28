@@ -47,6 +47,18 @@ node serve.mjs      →  http://localhost:3000
 | 각 페이지 본문 | `pages/*.html` |
 | 지도 | `index.html`, `pages/location.html` 의 "지도 영역" 자리에 카카오맵 임베드 |
 
+## 관리자 페이지 기능
+
+접속 `https://배포주소/admin/` → 비밀번호 로그인 후 3개 탭:
+
+| 탭 | 기능 |
+|----|------|
+| 상담 관리 | 신청 목록·상세, 상태(대기중/완료) 토글, 통계 |
+| 공지사항 | 작성·수정·삭제, 상단 고정, 공개/비공개 (`notices` 테이블) |
+| 갤러리 | 사진 업로드(자동 축소)·설명·정렬·삭제, 공개/비공개 (`gallery_items` + Storage `gallery` 버킷) |
+
+공개 페이지(`pages/notice.html`, `pages/gallery.html`)는 anon 키로 '공개' 항목만 읽습니다.
+
 ---
 
 ## Phase 3 — 백엔드 연동 (상담신청 저장)

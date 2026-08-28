@@ -27,42 +27,43 @@
 </section>
 
 <main class="mx-auto max-w-4xl px-5 sm:px-6 py-16 sm:py-20">
-  <ul id="noticeList" class="divide-y divide-hairline border-y border-hairline">
-    <li class="py-5 reveal">
-      <div class="flex items-start gap-3">
-        <span class="mt-0.5 inline-flex flex-shrink-0 rounded-md bg-primary/10 text-primary-deep text-xs font-semibold px-2 py-1">안내</span>
-        <div>
-          <p class="font-semibold text-ink">위드케어 재가노인복지센터 홈페이지를 새단장했습니다</p>
-          <p class="mt-1 text-sm text-ink-secondary">서비스 안내와 상담 신청을 더 편하게 이용하실 수 있도록 홈페이지를 개편했습니다. 많은 이용 바랍니다.</p>
-          <p class="mt-2 text-xs text-ink-mute">2026-08-28</p>
-        </div>
-      </div>
-    </li>
-    <li class="py-5 reveal">
-      <div class="flex items-start gap-3">
-        <span class="mt-0.5 inline-flex flex-shrink-0 rounded-md bg-sage/20 text-sage-dark text-xs font-semibold px-2 py-1">서비스</span>
-        <div>
-          <p class="font-semibold text-ink">방문간호 서비스 이용 문의를 받습니다</p>
-          <p class="mt-1 text-sm text-ink-secondary">의료적 돌봄이 필요한 어르신을 위한 방문간호 상담을 진행하고 있습니다. 지시서 발급 절차부터 안내해 드립니다.</p>
-          <p class="mt-2 text-xs text-ink-mute">2026-08-20</p>
-        </div>
-      </div>
-    </li>
-    <li class="py-5 reveal">
-      <div class="flex items-start gap-3">
-        <span class="mt-0.5 inline-flex flex-shrink-0 rounded-md bg-primary/10 text-primary-deep text-xs font-semibold px-2 py-1">채용</span>
-        <div>
-          <p class="font-semibold text-ink">함께할 요양보호사 · 간호 인력을 모십니다</p>
-          <p class="mt-1 text-sm text-ink-secondary">인천 계양구·서구·부평구 지역에서 어르신을 정성껏 돌보아 주실 분을 상시 모집합니다. 전화로 문의해 주세요.</p>
-          <p class="mt-2 text-xs text-ink-mute">2026-08-10</p>
-        </div>
-      </div>
-    </li>
-  </ul>
-  <p class="mt-6 text-xs text-ink-mute">※ 공지사항은 추후 관리자 페이지에서 직접 등록·수정할 수 있도록 연동할 수 있습니다.</p>
+  <div id="noticeState" class="text-sm text-ink-mute py-8 text-center">공지사항을 불러오는 중입니다…</div>
+  <ul id="noticeList" class="hidden divide-y divide-hairline border-y border-hairline"></ul>
 </main>
 
 <footer id="site-footer"></footer>
 <script src="/js/site.js"></script>
+<script>
+(function () {
+  var C = window.SITE_CONFIG || {};
+  var listEl = document.getElementById('noticeList');
+  var stateEl = document.getElementById('noticeState');
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); }
+  function badgeClass(cat) {
+    return cat === '서비스' ? 'bg-sage/20 text-sage-dark' : 'bg-primary/10 text-primary-deep';
+  }
+  function render(items) {
+    if (!items.length) { stateEl.textContent = '등록된 공지사항이 없습니다.'; return; }
+    listEl.innerHTML = items.map(function (n) {
+      var d = new Date(n.created_at);
+      var ds = isNaN(d) ? '' : d.toLocaleDateString('ko-KR');
+      return '<li class="py-5"><div class="flex items-start gap-3">' +
+        '<span class="mt-0.5 inline-flex flex-shrink-0 rounded-md ' + badgeClass(n.category) + ' text-xs font-semibold px-2 py-1">' + esc(n.category) + '</span>' +
+        '<div><p class="font-semibold text-ink">' + (n.pinned ? '<span class="text-primary-deep">[공지] </span>' : '') + esc(n.title) + '</p>' +
+        '<p class="mt-1 text-sm text-ink-secondary whitespace-pre-wrap">' + esc(n.body) + '</p>' +
+        '<p class="mt-2 text-xs text-ink-mute">' + ds + '</p></div></div></li>';
+    }).join('');
+    stateEl.classList.add('hidden');
+    listEl.classList.remove('hidden');
+  }
+  if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) { stateEl.textContent = '등록된 공지사항이 없습니다.'; return; }
+  fetch(C.SUPABASE_URL + '/rest/v1/notices?select=category,title,body,pinned,created_at&published=eq.true&order=pinned.desc,created_at.desc', {
+    headers: { apikey: C.SUPABASE_ANON_KEY, Authorization: 'Bearer ' + C.SUPABASE_ANON_KEY },
+  })
+    .then(function (r) { return r.ok ? r.json() : []; })
+    .then(function (data) { render(Array.isArray(data) ? data : []); })
+    .catch(function () { stateEl.textContent = '공지사항을 불러오지 못했습니다.'; });
+})();
+</script>
 </body>
 </html>

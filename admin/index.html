@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>상담 관리 | 위드케어</title>
+<title>위드케어 관리</title>
 <link rel="icon" href="/brand_logo/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="/js/tailwind-setup.js"></script>
 <link rel="stylesheet" href="/css/style.css">
+<script src="/js/config.js"></script>
 </head>
 <body class="bg-canvas-soft text-ink min-h-screen">
 
@@ -31,38 +32,34 @@
 
 <!-- 대시보드 -->
 <div id="dashView" class="hidden">
-  <header class="bg-white border-b border-hairline">
+  <header class="bg-white border-b border-hairline sticky top-0 z-30">
     <div class="mx-auto max-w-6xl px-5 sm:px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-2.5">
         <img src="/brand_logo/logo.svg" alt="" class="h-8 w-8 rounded-lg">
-        <span class="font-display font-bold text-primary">상담 신청 관리</span>
+        <span class="font-display font-bold text-primary">위드케어 관리</span>
       </div>
       <button id="logoutBtn" class="text-sm text-ink-mute hover:text-primary">로그아웃</button>
+    </div>
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 flex gap-1">
+      <button data-tab="consult" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-ink-mute">상담 관리</button>
+      <button data-tab="notice" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-ink-mute">공지사항</button>
+      <button data-tab="gallery" class="tab-btn px-4 py-3 text-sm font-semibold border-b-2 border-transparent text-ink-mute">갤러리</button>
     </div>
   </header>
 
   <main class="mx-auto max-w-6xl px-5 sm:px-6 py-8">
-    <div class="grid gap-4 sm:grid-cols-3">
-      <div class="rounded-xl border border-hairline bg-white p-5">
-        <p class="text-xs text-ink-mute">전체 신청</p>
-        <p id="statTotal" class="mt-1 font-display text-2xl font-bold text-ink">-</p>
-      </div>
-      <div class="rounded-xl border border-hairline bg-white p-5">
-        <p class="text-xs text-ink-mute">대기중</p>
-        <p id="statPending" class="mt-1 font-display text-2xl font-bold text-primary-deep">-</p>
-      </div>
-      <div class="rounded-xl border border-hairline bg-white p-5">
-        <p class="text-xs text-ink-mute">오늘 신청</p>
-        <p id="statToday" class="mt-1 font-display text-2xl font-bold text-ink">-</p>
-      </div>
-    </div>
 
-    <div id="listError" class="hidden mt-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"></div>
-
-    <div class="mt-6 overflow-x-auto rounded-xl border border-hairline bg-white">
-      <table class="w-full text-sm">
-        <thead class="bg-cream text-ink">
-          <tr>
+    <!-- ===== 상담 관리 ===== -->
+    <section id="panel-consult" class="panel">
+      <div class="grid gap-4 sm:grid-cols-3">
+        <div class="rounded-xl border border-hairline bg-white p-5"><p class="text-xs text-ink-mute">전체 신청</p><p id="statTotal" class="mt-1 font-display text-2xl font-bold text-ink">-</p></div>
+        <div class="rounded-xl border border-hairline bg-white p-5"><p class="text-xs text-ink-mute">대기중</p><p id="statPending" class="mt-1 font-display text-2xl font-bold text-primary-deep">-</p></div>
+        <div class="rounded-xl border border-hairline bg-white p-5"><p class="text-xs text-ink-mute">오늘 신청</p><p id="statToday" class="mt-1 font-display text-2xl font-bold text-ink">-</p></div>
+      </div>
+      <div id="consultError" class="hidden mt-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"></div>
+      <div class="mt-6 overflow-x-auto rounded-xl border border-hairline bg-white">
+        <table class="w-full text-sm">
+          <thead class="bg-cream text-ink"><tr>
             <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">접수일</th>
             <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">이름</th>
             <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">연락처</th>
@@ -70,15 +67,35 @@
             <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">희망 서비스</th>
             <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">상태</th>
             <th class="text-left px-4 py-3 font-semibold">상세</th>
-          </tr>
-        </thead>
-        <tbody id="rows" class="text-ink-secondary"></tbody>
-      </table>
-    </div>
+          </tr></thead>
+          <tbody id="consultRows" class="text-ink-secondary"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ===== 공지사항 ===== -->
+    <section id="panel-notice" class="panel hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="font-display font-bold text-lg text-ink">공지사항</h2>
+        <button id="noticeNewBtn" class="btn rounded-full bg-primary hover:bg-primary-press text-white text-sm font-semibold px-4 py-2">+ 새 공지</button>
+      </div>
+      <div id="noticeError" class="hidden mt-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"></div>
+      <div id="noticeList" class="mt-5 space-y-3"></div>
+    </section>
+
+    <!-- ===== 갤러리 ===== -->
+    <section id="panel-gallery" class="panel hidden">
+      <div class="flex items-center justify-between">
+        <h2 class="font-display font-bold text-lg text-ink">갤러리</h2>
+        <button id="galleryNewBtn" class="btn rounded-full bg-primary hover:bg-primary-press text-white text-sm font-semibold px-4 py-2">+ 사진 추가</button>
+      </div>
+      <div id="galleryError" class="hidden mt-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"></div>
+      <div id="galleryGrid" class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
   </main>
 </div>
 
-<!-- 상세 모달 -->
+<!-- 상담 상세 모달 -->
 <div id="detailModal" class="hidden fixed inset-0 z-50">
   <div class="absolute inset-0 bg-ink/40" data-close></div>
   <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg rounded-2xl bg-white p-7 shadow-pop max-h-[85vh] overflow-y-auto">
@@ -90,38 +107,120 @@
   </div>
 </div>
 
+<!-- 공지 작성/수정 모달 -->
+<div id="noticeModal" class="hidden fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-ink/40" data-close></div>
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-lg rounded-2xl bg-white p-7 shadow-pop max-h-[88vh] overflow-y-auto">
+    <div class="flex items-center justify-between">
+      <h2 id="noticeModalTitle" class="font-display font-bold text-lg text-ink">새 공지</h2>
+      <button data-close class="h-9 w-9 rounded-lg text-ink-mute hover:bg-canvas-soft">✕</button>
+    </div>
+    <form id="noticeForm" class="mt-4 space-y-3">
+      <input type="hidden" id="nf-id">
+      <div>
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">분류</label>
+        <select id="nf-category" class="field">
+          <option>안내</option><option>서비스</option><option>채용</option><option>행사</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">제목</label>
+        <input type="text" id="nf-title" class="field" required>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">내용</label>
+        <textarea id="nf-body" rows="5" class="field" required></textarea>
+      </div>
+      <div class="flex gap-5 text-sm">
+        <label class="flex items-center gap-2"><input type="checkbox" id="nf-pinned" class="h-4 w-4 accent-primary"> 상단 고정</label>
+        <label class="flex items-center gap-2"><input type="checkbox" id="nf-published" class="h-4 w-4 accent-primary" checked> 공개</label>
+      </div>
+      <div class="pt-2 flex gap-2">
+        <button type="submit" class="btn flex-1 rounded-full bg-primary hover:bg-primary-press text-white font-semibold py-3">저장</button>
+        <button type="button" data-close class="btn rounded-full border border-hairline px-5 py-3 text-ink-secondary">취소</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 갤러리 추가/수정 모달 -->
+<div id="galleryModal" class="hidden fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-ink/40" data-close></div>
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92%] max-w-md rounded-2xl bg-white p-7 shadow-pop max-h-[88vh] overflow-y-auto">
+    <div class="flex items-center justify-between">
+      <h2 id="galleryModalTitle" class="font-display font-bold text-lg text-ink">사진 추가</h2>
+      <button data-close class="h-9 w-9 rounded-lg text-ink-mute hover:bg-canvas-soft">✕</button>
+    </div>
+    <form id="galleryForm" class="mt-4 space-y-3">
+      <input type="hidden" id="gf-id">
+      <div id="gf-fileWrap">
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">사진 (jpg / png / webp)</label>
+        <input type="file" id="gf-file" accept="image/jpeg,image/png,image/webp" class="block w-full text-sm text-ink-secondary file:mr-3 file:rounded-lg file:border-0 file:bg-sage-light file:px-3 file:py-2 file:text-primary-deep file:font-semibold">
+        <img id="gf-preview" class="mt-3 hidden max-h-48 rounded-lg border border-hairline">
+        <p class="mt-1 text-xs text-ink-mute">업로드 전에 자동으로 가로 1600px 이하로 축소됩니다.</p>
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">설명 (선택)</label>
+        <input type="text" id="gf-title" class="field" placeholder="예: 어르신 생신 축하">
+      </div>
+      <div>
+        <label class="block text-sm font-semibold text-ink-secondary mb-1">정렬 순서 (낮을수록 먼저)</label>
+        <input type="number" id="gf-sort" class="field" value="0">
+      </div>
+      <label class="flex items-center gap-2 text-sm"><input type="checkbox" id="gf-published" class="h-4 w-4 accent-primary" checked> 공개</label>
+      <div class="pt-2 flex gap-2">
+        <button type="submit" id="gf-submit" class="btn flex-1 rounded-full bg-primary hover:bg-primary-press text-white font-semibold py-3">저장</button>
+        <button type="button" data-close class="btn rounded-full border border-hairline px-5 py-3 text-ink-secondary">취소</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .tab-btn.active { color: #A85C3F; border-color: #C9793C; }
+</style>
+
 <script>
 (function () {
   var KEY = 'wc_admin_pw';
-  var loginView = document.getElementById('loginView');
-  var dashView = document.getElementById('dashView');
-  var pwInput = document.getElementById('pw');
-  var loginError = document.getElementById('loginError');
-  var listError = document.getElementById('listError');
-  var rowsEl = document.getElementById('rows');
-  var modal = document.getElementById('detailModal');
-  var cache = [];
-
+  var CFG = window.SITE_CONFIG || {};
+  var $ = function (id) { return document.getElementById(id); };
   function pw() { return sessionStorage.getItem(KEY) || ''; }
-  function esc(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); }
-  function fmtDate(s) { var d = new Date(s); return isNaN(d) ? '-' : d.toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]; }); }
+  function fmtDate(s) { var d = new Date(s); return isNaN(d) ? '-' : d.toLocaleString('ko-KR', { year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+  function fmtDay(s) { var d = new Date(s); return isNaN(d) ? '-' : d.toLocaleDateString('ko-KR'); }
 
-  async function api(method, body) {
-    var opt = { method: method, headers: { 'x-admin-password': pw() } };
+  async function api(path, method, body) {
+    var opt = { method: method || 'GET', headers: { 'x-admin-password': pw() } };
     if (body) { opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
-    var res = await fetch('/api/consultations', opt);
-    if (res.status === 401) { throw new Error('unauth'); }
-    if (!res.ok) { throw new Error('http ' + res.status); }
-    return res.json();
+    var res = await fetch(path, opt);
+    if (res.status === 401) throw new Error('unauth');
+    var data = null;
+    try { data = await res.json(); } catch (e) {}
+    if (!res.ok) throw new Error((data && data.error) || ('HTTP ' + res.status));
+    return data;
   }
 
-  function render() {
-    document.getElementById('statTotal').textContent = cache.length;
-    document.getElementById('statPending').textContent = cache.filter(function (r) { return r.status !== 'done'; }).length;
+  /* ---------------- 상담 관리 ---------------- */
+  var consultCache = [];
+  async function loadConsult() {
+    $('consultError').classList.add('hidden');
+    try {
+      consultCache = await api('/api/consultations');
+      if (!Array.isArray(consultCache)) consultCache = [];
+      renderConsult();
+    } catch (e) {
+      if (e.message === 'unauth') return logout();
+      $('consultError').textContent = '목록을 불러오지 못했습니다: ' + e.message;
+      $('consultError').classList.remove('hidden');
+    }
+  }
+  function renderConsult() {
+    $('statTotal').textContent = consultCache.length;
+    $('statPending').textContent = consultCache.filter(function (r) { return r.status !== 'done'; }).length;
     var today = new Date().toDateString();
-    document.getElementById('statToday').textContent = cache.filter(function (r) { return new Date(r.created_at).toDateString() === today; }).length;
-
-    rowsEl.innerHTML = cache.map(function (r, i) {
+    $('statToday').textContent = consultCache.filter(function (r) { return new Date(r.created_at).toDateString() === today; }).length;
+    $('consultRows').innerHTML = consultCache.map(function (r, i) {
       var done = r.status === 'done';
       return '<tr class="border-t border-hairline">' +
         '<td class="px-4 py-3 whitespace-nowrap">' + fmtDate(r.created_at) + '</td>' +
@@ -129,66 +228,230 @@
         '<td class="px-4 py-3 whitespace-nowrap">' + esc(r.phone) + '</td>' +
         '<td class="px-4 py-3 whitespace-nowrap">' + esc(r.grade) + '</td>' +
         '<td class="px-4 py-3 whitespace-nowrap">' + esc((r.services || []).join(', ') || '-') + '</td>' +
-        '<td class="px-4 py-3 whitespace-nowrap">' +
-          '<button data-toggle="' + i + '" class="rounded-full px-2.5 py-1 text-xs font-semibold ' +
-          (done ? 'bg-sage-light text-sage-dark' : 'bg-primary/10 text-primary-deep') + '">' +
-          (done ? '완료' : '대기중') + '</button>' +
-        '</td>' +
-        '<td class="px-4 py-3"><button data-detail="' + i + '" class="text-primary-deep hover:underline">보기</button></td>' +
+        '<td class="px-4 py-3 whitespace-nowrap"><button data-ctoggle="' + i + '" class="rounded-full px-2.5 py-1 text-xs font-semibold ' +
+          (done ? 'bg-sage-light text-sage-dark' : 'bg-primary/10 text-primary-deep') + '">' + (done ? '완료' : '대기중') + '</button></td>' +
+        '<td class="px-4 py-3"><button data-cdetail="' + i + '" class="text-primary-deep hover:underline">보기</button></td>' +
         '</tr>';
     }).join('') || '<tr><td colspan="7" class="px-4 py-10 text-center text-ink-mute">신청 내역이 없습니다.</td></tr>';
   }
-
-  async function load() {
-    listError.classList.add('hidden');
-    try {
-      cache = await api('GET');
-      if (!Array.isArray(cache)) cache = [];
-      render();
-    } catch (e) {
-      if (e.message === 'unauth') { logout(); return; }
-      listError.textContent = '목록을 불러오지 못했습니다. 서버 설정(환경변수)을 확인하세요.';
-      listError.classList.remove('hidden');
-    }
-  }
-
-  rowsEl.addEventListener('click', async function (e) {
-    var t = e.target.closest('[data-toggle]');
-    var d = e.target.closest('[data-detail]');
+  $('consultRows').addEventListener('click', async function (e) {
+    var t = e.target.closest('[data-ctoggle]'), d = e.target.closest('[data-cdetail]');
     if (t) {
-      var row = cache[+t.dataset.toggle];
+      var row = consultCache[+t.dataset.ctoggle];
       var next = row.status === 'done' ? 'pending' : 'done';
       t.disabled = true;
-      try { await api('PATCH', { id: row.id, status: next }); row.status = next; render(); }
-      catch (err) { alert('상태 변경 실패'); }
+      try { await api('/api/consultations', 'PATCH', { id: row.id, status: next }); row.status = next; renderConsult(); }
+      catch (err) { alert('상태 변경 실패: ' + err.message); t.disabled = false; }
     }
     if (d) {
-      var r = cache[+d.dataset.detail];
-      document.getElementById('detailBody').innerHTML = [
-        ['접수일', fmtDate(r.created_at)], ['이름', r.name], ['연락처', r.phone],
-        ['관계', r.relation], ['장기요양 등급', r.grade], ['거주 지역', r.area],
-        ['희망 서비스', (r.services || []).join(', ')], ['어르신 상태', r.condition],
-        ['추가 문의', r.message], ['상태', r.status === 'done' ? '완료' : '대기중'],
-      ].map(function (kv) {
-        return '<div><dt class="text-ink-mute">' + kv[0] + '</dt><dd class="mt-0.5 text-ink whitespace-pre-wrap">' + esc(kv[1] || '-') + '</dd></div>';
-      }).join('');
-      modal.classList.remove('hidden');
+      var r = consultCache[+d.dataset.cdetail];
+      $('detailBody').innerHTML = [
+        ['접수일', fmtDate(r.created_at)], ['이름', r.name], ['연락처', r.phone], ['관계', r.relation],
+        ['장기요양 등급', r.grade], ['거주 지역', r.area], ['희망 서비스', (r.services || []).join(', ')],
+        ['어르신 상태', r.condition], ['추가 문의', r.message], ['상태', r.status === 'done' ? '완료' : '대기중'],
+      ].map(function (kv) { return '<div><dt class="text-ink-mute">' + kv[0] + '</dt><dd class="mt-0.5 text-ink whitespace-pre-wrap">' + esc(kv[1] || '-') + '</dd></div>'; }).join('');
+      $('detailModal').classList.remove('hidden');
     }
   });
 
-  modal.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) modal.classList.add('hidden'); });
-
-  function showDash() { loginView.classList.add('hidden'); dashView.classList.remove('hidden'); load(); }
-  function logout() { sessionStorage.removeItem(KEY); dashView.classList.add('hidden'); loginView.classList.remove('hidden'); }
-
-  document.getElementById('loginForm').addEventListener('submit', async function (e) {
+  /* ---------------- 공지사항 ---------------- */
+  var noticeCache = [];
+  async function loadNotice() {
+    $('noticeError').classList.add('hidden');
+    try { noticeCache = await api('/api/notices'); if (!Array.isArray(noticeCache)) noticeCache = []; renderNotice(); }
+    catch (e) {
+      if (e.message === 'unauth') return logout();
+      $('noticeError').textContent = '불러오기 실패: ' + e.message + ' (테이블이 생성됐는지 확인하세요)';
+      $('noticeError').classList.remove('hidden');
+    }
+  }
+  function renderNotice() {
+    $('noticeList').innerHTML = noticeCache.map(function (n, i) {
+      return '<div class="rounded-xl border border-hairline bg-white p-4">' +
+        '<div class="flex items-start justify-between gap-3">' +
+          '<div class="min-w-0">' +
+            '<div class="flex items-center gap-2 flex-wrap">' +
+              (n.pinned ? '<span class="text-xs font-bold text-primary-deep">📌 고정</span>' : '') +
+              '<span class="text-xs rounded bg-cream px-2 py-0.5 text-ink-secondary">' + esc(n.category) + '</span>' +
+              (n.published ? '' : '<span class="text-xs rounded bg-red-50 px-2 py-0.5 text-red-600">비공개</span>') +
+            '</div>' +
+            '<p class="mt-1 font-semibold text-ink truncate">' + esc(n.title) + '</p>' +
+            '<p class="mt-1 text-sm text-ink-mute line-clamp-2 whitespace-pre-wrap">' + esc(n.body) + '</p>' +
+            '<p class="mt-1 text-xs text-ink-mute">' + fmtDay(n.created_at) + '</p>' +
+          '</div>' +
+          '<div class="flex flex-shrink-0 gap-1">' +
+            '<button data-nedit="' + i + '" class="text-xs rounded-lg border border-hairline px-2.5 py-1.5 text-ink-secondary hover:border-primary">수정</button>' +
+            '<button data-npin="' + i + '" class="text-xs rounded-lg border border-hairline px-2.5 py-1.5 text-ink-secondary hover:border-primary">' + (n.pinned ? '고정해제' : '고정') + '</button>' +
+            '<button data-npub="' + i + '" class="text-xs rounded-lg border border-hairline px-2.5 py-1.5 text-ink-secondary hover:border-primary">' + (n.published ? '숨기기' : '공개') + '</button>' +
+            '<button data-ndel="' + i + '" class="text-xs rounded-lg border border-red-200 px-2.5 py-1.5 text-red-600 hover:bg-red-50">삭제</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('') || '<p class="text-sm text-ink-mute py-8 text-center">등록된 공지가 없습니다.</p>';
+  }
+  function openNoticeModal(n) {
+    $('noticeModalTitle').textContent = n ? '공지 수정' : '새 공지';
+    $('nf-id').value = n ? n.id : '';
+    $('nf-category').value = n ? n.category : '안내';
+    $('nf-title').value = n ? n.title : '';
+    $('nf-body').value = n ? n.body : '';
+    $('nf-pinned').checked = n ? n.pinned : false;
+    $('nf-published').checked = n ? n.published : true;
+    $('noticeModal').classList.remove('hidden');
+  }
+  $('noticeNewBtn').addEventListener('click', function () { openNoticeModal(null); });
+  $('noticeForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-    loginError.classList.add('hidden');
-    sessionStorage.setItem(KEY, pwInput.value);
-    try { await api('GET'); showDash(); }
-    catch (err) { sessionStorage.removeItem(KEY); loginError.classList.remove('hidden'); }
+    var id = $('nf-id').value;
+    var payload = {
+      category: $('nf-category').value, title: $('nf-title').value.trim(), body: $('nf-body').value.trim(),
+      pinned: $('nf-pinned').checked, published: $('nf-published').checked,
+    };
+    if (!payload.title || !payload.body) return;
+    try {
+      if (id) await api('/api/notices', 'PATCH', Object.assign({ id: id }, payload));
+      else await api('/api/notices', 'POST', payload);
+      $('noticeModal').classList.add('hidden');
+      loadNotice();
+    } catch (err) { alert('저장 실패: ' + err.message); }
   });
-  document.getElementById('logoutBtn').addEventListener('click', logout);
+  $('noticeList').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var n;
+    if (b.dataset.nedit != null) return openNoticeModal(noticeCache[+b.dataset.nedit]);
+    if (b.dataset.npin != null) { n = noticeCache[+b.dataset.npin]; try { await api('/api/notices', 'PATCH', { id: n.id, pinned: !n.pinned }); loadNotice(); } catch (x) { alert(x.message); } }
+    if (b.dataset.npub != null) { n = noticeCache[+b.dataset.npub]; try { await api('/api/notices', 'PATCH', { id: n.id, published: !n.published }); loadNotice(); } catch (x) { alert(x.message); } }
+    if (b.dataset.ndel != null) { n = noticeCache[+b.dataset.ndel]; if (confirm('이 공지를 삭제할까요?')) { try { await api('/api/notices', 'DELETE', { id: n.id }); loadNotice(); } catch (x) { alert(x.message); } } }
+  });
+
+  /* ---------------- 갤러리 ---------------- */
+  var galleryCache = [];
+  function imgUrl(path) { return CFG.SUPABASE_URL + '/storage/v1/object/public/gallery/' + path; }
+  async function loadGallery() {
+    $('galleryError').classList.add('hidden');
+    try { galleryCache = await api('/api/gallery'); if (!Array.isArray(galleryCache)) galleryCache = []; renderGallery(); }
+    catch (e) {
+      if (e.message === 'unauth') return logout();
+      $('galleryError').textContent = '불러오기 실패: ' + e.message + ' (테이블/버킷 생성 여부 확인)';
+      $('galleryError').classList.remove('hidden');
+    }
+  }
+  function renderGallery() {
+    $('galleryGrid').innerHTML = galleryCache.map(function (g, i) {
+      return '<div class="rounded-xl border border-hairline bg-white overflow-hidden">' +
+        '<div class="aspect-[4/3] bg-canvas-soft"><img src="' + imgUrl(g.image_path) + '" alt="" class="w-full h-full object-cover"></div>' +
+        '<div class="p-3">' +
+          '<p class="text-sm font-medium text-ink truncate">' + (esc(g.title) || '<span class="text-ink-mute">제목 없음</span>') + '</p>' +
+          '<p class="text-xs text-ink-mute">순서 ' + g.sort_order + (g.published ? '' : ' · 비공개') + '</p>' +
+          '<div class="mt-2 flex gap-1">' +
+            '<button data-gedit="' + i + '" class="text-xs rounded-lg border border-hairline px-2 py-1 text-ink-secondary hover:border-primary">수정</button>' +
+            '<button data-gpub="' + i + '" class="text-xs rounded-lg border border-hairline px-2 py-1 text-ink-secondary hover:border-primary">' + (g.published ? '숨기기' : '공개') + '</button>' +
+            '<button data-gdel="' + i + '" class="text-xs rounded-lg border border-red-200 px-2 py-1 text-red-600 hover:bg-red-50">삭제</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('') || '<p class="text-sm text-ink-mute py-8 text-center col-span-full">등록된 사진이 없습니다.</p>';
+  }
+  function resizeImage(file, maxW) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () {
+        var scale = Math.min(1, maxW / img.width);
+        var w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+        var cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+        cv.getContext('2d').drawImage(img, 0, 0, w, h);
+        resolve(cv.toDataURL('image/jpeg', 0.82));
+      };
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+  var pendingDataUrl = null;
+  function openGalleryModal(g) {
+    $('galleryModalTitle').textContent = g ? '사진 수정' : '사진 추가';
+    $('gf-id').value = g ? g.id : '';
+    $('gf-title').value = g ? g.title : '';
+    $('gf-sort').value = g ? g.sort_order : 0;
+    $('gf-published').checked = g ? g.published : true;
+    $('gf-fileWrap').style.display = g ? 'none' : '';
+    $('gf-file').value = ''; $('gf-preview').classList.add('hidden'); pendingDataUrl = null;
+    $('galleryModal').classList.remove('hidden');
+  }
+  $('galleryNewBtn').addEventListener('click', function () { openGalleryModal(null); });
+  $('gf-file').addEventListener('change', async function () {
+    var f = this.files[0]; if (!f) return;
+    try {
+      pendingDataUrl = await resizeImage(f, 1600);
+      $('gf-preview').src = pendingDataUrl; $('gf-preview').classList.remove('hidden');
+    } catch (e) { alert('이미지를 읽지 못했습니다.'); }
+  });
+  $('galleryForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var id = $('gf-id').value;
+    var btn = $('gf-submit'); btn.disabled = true; btn.textContent = '저장 중...';
+    try {
+      if (id) {
+        await api('/api/gallery', 'PATCH', { id: id, title: $('gf-title').value.trim(), sort_order: +$('gf-sort').value || 0, published: $('gf-published').checked });
+      } else {
+        if (!pendingDataUrl) { alert('사진을 선택하세요.'); btn.disabled = false; btn.textContent = '저장'; return; }
+        await api('/api/gallery', 'POST', { dataUrl: pendingDataUrl, title: $('gf-title').value.trim(), sort_order: +$('gf-sort').value || 0, published: $('gf-published').checked });
+      }
+      $('galleryModal').classList.add('hidden');
+      loadGallery();
+    } catch (err) { alert('저장 실패: ' + err.message); }
+    btn.disabled = false; btn.textContent = '저장';
+  });
+  $('galleryGrid').addEventListener('click', async function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    var g;
+    if (b.dataset.gedit != null) return openGalleryModal(galleryCache[+b.dataset.gedit]);
+    if (b.dataset.gpub != null) { g = galleryCache[+b.dataset.gpub]; try { await api('/api/gallery', 'PATCH', { id: g.id, published: !g.published }); loadGallery(); } catch (x) { alert(x.message); } }
+    if (b.dataset.gdel != null) { g = galleryCache[+b.dataset.gdel]; if (confirm('이 사진을 삭제할까요?')) { try { await api('/api/gallery', 'DELETE', { id: g.id }); loadGallery(); } catch (x) { alert(x.message); } } }
+  });
+
+  /* ---------------- 공통 ---------------- */
+  document.querySelectorAll('[data-close]').forEach(function () {});
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('[data-close]')) {
+      var m = e.target.closest('.fixed'); if (m) m.classList.add('hidden');
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') document.querySelectorAll('.fixed:not(.hidden)').forEach(function (m) { if (m.id !== 'loginView') m.classList.add('hidden'); });
+  });
+
+  var loaded = {};
+  function switchTab(name) {
+    document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.toggle('active', b.dataset.tab === name); });
+    document.querySelectorAll('.panel').forEach(function (p) { p.classList.toggle('hidden', p.id !== 'panel-' + name); });
+    if (!loaded[name]) {
+      loaded[name] = true;
+      if (name === 'consult') loadConsult();
+      if (name === 'notice') loadNotice();
+      if (name === 'gallery') loadGallery();
+    }
+    try { sessionStorage.setItem('wc_admin_tab', name); } catch (e) {}
+  }
+  document.querySelectorAll('.tab-btn').forEach(function (b) {
+    b.addEventListener('click', function () { switchTab(b.dataset.tab); });
+  });
+
+  function showDash() {
+    $('loginView').classList.add('hidden');
+    $('dashView').classList.remove('hidden');
+    loaded = {};
+    switchTab(sessionStorage.getItem('wc_admin_tab') || 'consult');
+  }
+  function logout() { sessionStorage.removeItem(KEY); $('dashView').classList.add('hidden'); $('loginView').classList.remove('hidden'); }
+
+  $('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    $('loginError').classList.add('hidden');
+    sessionStorage.setItem(KEY, $('pw').value);
+    try { await api('/api/consultations'); showDash(); }
+    catch (err) { sessionStorage.removeItem(KEY); $('loginError').classList.remove('hidden'); }
+  });
+  $('logoutBtn').addEventListener('click', logout);
 
   if (pw()) showDash();
 })();
