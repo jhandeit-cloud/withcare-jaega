@@ -220,6 +220,30 @@ img, svg { max-width: 100%; }
 #site-header { transition: box-shadow .25s var(--ease), background-color .25s var(--ease); }
 body.scrolled #site-header { box-shadow: 0 10px 30px -14px rgba(122,69,38,0.20); background-color: rgba(253,251,247,0.94); }
 
+/* ---------- 데스크톱 드롭다운 메뉴 (불투명 · 부드럽게) ---------- */
+.nav-panel {
+  z-index: 60;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, 6px);
+  transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+  pointer-events: none;
+}
+.nav-panel > ul { background: #fff; }
+.nav-group:hover > .nav-panel,
+.nav-group:focus-within > .nav-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+  pointer-events: auto;
+}
+.nav-group:hover .nav-caret,
+.nav-group:focus-within .nav-caret { transform: rotate(180deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-panel { transition: opacity .01s, visibility .01s; transform: translate(-50%, 0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn:hover, .card-hover:hover, .card-hover:hover .icon-tile, .group:hover .arrow-move { transform: none; }

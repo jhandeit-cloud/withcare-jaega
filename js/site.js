@@ -37,19 +37,19 @@
     var desktop = NAV.map(function (g) {
       var sub = g.children.map(function (c) {
         var on = c.href === location.pathname;
-        return '<li><a href="' + c.href + '" class="block px-3.5 py-2.5 text-sm rounded-xl transition-colors ' +
-          (on ? 'text-primary-deep font-semibold bg-primary-50' : 'text-ink-secondary hover:text-primary-deep hover:bg-paper-cream') +
+        return '<li><a href="' + c.href + '" class="block px-3.5 py-2.5 text-[14px] font-medium rounded-xl transition-colors duration-150 ' +
+          (on ? 'text-primary-deep font-semibold bg-primary-50' : 'text-ink hover:text-primary-deep hover:bg-primary-50/70') +
           '">' + c.label + '</a></li>';
       }).join('');
       return (
-        '<div class="group relative">' +
+        '<div class="nav-group relative">' +
           '<a href="' + g.href + '" class="flex items-center gap-1 px-3.5 py-2.5 text-[15px] font-semibold rounded-xl transition-colors ' +
             (isActive(g) ? 'text-primary-deep' : 'text-ink-secondary hover:text-primary-deep') + '">' +
             g.label +
-            '<svg class="w-3 h-3 mt-0.5 text-ink-mute transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 9l6 6 6-6"/></svg>' +
+            '<svg class="nav-caret w-3 h-3 mt-0.5 text-ink-mute transition-transform duration-200" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 9l6 6 6-6"/></svg>' +
           '</a>' +
-          '<div class="invisible translate-y-1 opacity-0 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 transition-all duration-200 absolute left-1/2 -translate-x-1/2 top-full pt-3 z-50">' +
-            '<ul class="min-w-[176px] rounded-2xl border border-hairline bg-white/98 backdrop-blur p-2 shadow-pop">' + sub + '</ul>' +
+          '<div class="nav-panel absolute left-1/2 -translate-x-1/2 top-full pt-3">' +
+            '<ul class="min-w-[184px] rounded-2xl border border-hairline bg-white p-2 shadow-pop">' + sub + '</ul>' +
           '</div>' +
         '</div>'
       );
