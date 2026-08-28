@@ -126,10 +126,10 @@
     var linkCols = NAV.map(function (g) {
       return (
         '<div>' +
-          '<p class="text-eyebrow text-accent-soft/80 mb-3">' + g.label + '</p>' +
+          '<p class="text-eyebrow text-accent-soft/80 mb-2.5">' + g.label + '</p>' +
           '<ul class="space-y-2">' +
             g.children.map(function (c) {
-              return '<li><a href="' + c.href + '" class="text-[13.5px] text-cream/55 hover:text-white transition-colors">' + c.label + '</a></li>';
+              return '<li><a href="' + c.href + '" class="link-sweep text-[13.5px] text-cream/55 hover:text-white transition-colors">' + c.label + '</a></li>';
             }).join('') +
           '</ul>' +
         '</div>'
@@ -137,21 +137,21 @@
     }).join('');
     return (
       '<div class="h-1 bg-gradient-to-r from-accent via-primary to-clay"></div>' +
-      '<div class="mx-auto max-w-6xl px-6 py-16">' +
-        '<div class="grid gap-10 md:grid-cols-[1.5fr_repeat(5,1fr)]">' +
-          '<div>' +
+      '<div class="mx-auto max-w-6xl px-5 sm:px-6 py-12 sm:py-16">' +
+        '<div class="grid gap-x-6 gap-y-9 grid-cols-2 sm:grid-cols-3 md:grid-cols-[1.5fr_repeat(5,1fr)]">' +
+          '<div class="col-span-2 sm:col-span-3 md:col-span-1">' +
             '<div class="flex items-center gap-2.5">' +
               '<img src="/brand_logo/logo.svg" alt="" class="h-10 w-10 rounded-2xl">' +
               '<span class="font-display font-bold text-white text-lg">' + (C.centerShort || '위드케어') + '</span>' +
             '</div>' +
-            '<p class="mt-4 text-sm leading-relaxed text-cream/55">사랑의 수고로<br>어르신이 행복한 세상을<br>함께 만들어 갑니다.</p>' +
+            '<p class="mt-4 text-sm leading-relaxed text-cream/55">사랑의 수고로<br>어르신이 행복한 세상을 함께 만들어 갑니다.</p>' +
           '</div>' +
           linkCols +
         '</div>' +
-        '<div class="mt-14 pt-7 border-t border-white/10 text-[13px] leading-relaxed text-cream/50 space-y-1.5">' +
+        '<div class="mt-12 pt-6 border-t border-white/10 text-[12.5px] leading-relaxed text-cream/50 space-y-1.5">' +
           '<p><span class="text-cream/75 font-medium">' + (C.centerName || '') + '</span>　|　대표 ' + (C.rep || '') + '</p>' +
           '<p>주소 : ' + (C.addressCity || '') + '　|　서비스 지역 : ' + areas + '</p>' +
-          '<p>TEL : <a href="' + (C.telHref || '#') + '" class="hover:text-white">' + (C.tel || '') + '</a>　|　E-MAIL : <a href="mailto:' + (C.email || '') + '" class="hover:text-white">' + (C.email || '') + '</a></p>' +
+          '<p>TEL : <a href="' + (C.telHref || '#') + '" class="hover:text-white">' + (C.tel || '') + '</a>　|　E-MAIL : <a href="mailto:' + (C.email || '') + '" class="hover:text-white break-all">' + (C.email || '') + '</a></p>' +
           '<p class="pt-3 text-cream/35">COPYRIGHT © ' + (C.centerName || '') + '. ALL RIGHTS RESERVED.</p>' +
         '</div>' +
       '</div>'
@@ -168,7 +168,7 @@
     }
     var footer = document.getElementById('site-footer');
     if (footer) {
-      footer.className = 'bg-brand-darker mt-28';
+      footer.className = 'bg-brand-darker mt-16 sm:mt-24';
       footer.innerHTML = footerHTML();
     }
 
