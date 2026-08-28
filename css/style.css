@@ -8,7 +8,11 @@
   --ease: cubic-bezier(.22,.61,.36,1);
 }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-x: clip;            /* clip: 가로 넘침만 막고 sticky 헤더는 유지 (지원 브라우저에서 hidden 대체) */
+}
 body {
   font-family: 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
   color: #3B2C21;
@@ -16,10 +20,23 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+  overflow-x: clip;
   max-width: 100%;
   line-height: 1.7;
   letter-spacing: -0.003em;
 }
+
+/* 상단 메뉴: 모든 페이지에서 스크롤·이동과 무관하게 항상 고정 */
+#site-header {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  min-height: 64px;           /* JS 주입 전에도 공간 확보 → 페이지 이동 시 레이아웃 튐 방지 */
+  background: rgba(252, 249, 243, 0.96);
+  border-bottom: 1px solid rgba(236, 223, 203, 0.7);
+}
+@media (min-width: 768px) { #site-header { min-height: 112px; } }
 
 h1, h2, h3, h4, .font-display {
   font-family: 'Gowun Batang', 'Noto Serif KR', serif;
@@ -281,7 +298,7 @@ img, svg { max-width: 100%; }
 
 /* ---------- 헤더 스크롤 상태 ---------- */
 #site-header { transition: box-shadow .25s var(--ease), background-color .25s var(--ease); }
-body.scrolled #site-header { box-shadow: 0 10px 30px -14px rgba(122,69,38,0.20); background-color: rgba(253,251,247,0.94); }
+body.scrolled #site-header { box-shadow: 0 10px 30px -14px rgba(122,69,38,0.20); background-color: rgba(252,249,243,0.98); }
 
 /* ---------- 데스크톱 드롭다운 메뉴 (불투명 · 부드럽게) ---------- */
 .nav-panel {

@@ -162,7 +162,8 @@
   function mount() {
     var header = document.getElementById('site-header');
     if (header) {
-      header.className = 'sticky top-0 z-50 bg-paper/90 backdrop-blur-md border-b border-hairline/70';
+      /* position·배경·테두리는 style.css의 #site-header가 담당 (항상 고정) */
+      header.className = 'backdrop-blur-md';
       header.innerHTML = headerHTML();
       document.body.insertAdjacentHTML('beforeend', mobileMenuHTML());
     }
