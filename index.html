@@ -17,165 +17,230 @@
 <link rel="stylesheet" href="/css/style.css">
 <script src="/js/config.js"></script>
 </head>
-<body class="bg-white text-ink">
+<body class="bg-paper text-ink">
 
 <header id="site-header"></header>
 
 <main>
   <!-- 히어로 -->
-  <section class="hero-mesh relative overflow-hidden">
-    <div class="mx-auto max-w-6xl px-5 sm:px-6 py-20 sm:py-28 lg:py-32">
-      <div class="max-w-2xl">
-        <span class="inline-flex items-center gap-2 rounded-full bg-white/70 border border-hairline px-3.5 py-1.5 text-xs font-semibold text-primary-deep">
+  <section class="hero-mesh">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 pt-20 pb-28 sm:pt-28 sm:pb-32 lg:pt-32 lg:pb-36">
+      <div class="max-w-3xl">
+        <span class="inline-flex items-center gap-2 rounded-full bg-white/70 border border-hairline-strong/60 px-4 py-1.5 text-[13px] font-semibold text-primary-deep shadow-xs">
           <span class="h-1.5 w-1.5 rounded-full bg-primary"></span>
           인천 계양구 · 서구 · 부평구 노인장기요양 지정기관
         </span>
-        <h1 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-bold leading-[1.25] text-ink">
+        <h1 class="mt-6 text-display-2xl font-bold text-ink text-balance">
           사랑의 수고로<br>
           <span class="text-primary-deep">어르신이 행복한 세상</span>을<br>
           함께 만들어 갑니다
         </h1>
-        <p class="mt-5 text-base sm:text-lg leading-relaxed text-ink-secondary">
+        <p class="lead mt-6 max-w-xl">
           위드케어 재가노인복지센터는 어르신 한 분 한 분의 하루를 소중히 여기며,
-          방문요양·방문목욕·방문간호 서비스를 정성껏 제공합니다.
+          방문요양 · 방문목욕 · 방문간호 서비스를 정성껏 제공합니다.
         </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <a href="/pages/contact.html" class="btn inline-flex items-center rounded-full bg-primary hover:bg-primary-press text-white font-semibold px-6 py-3.5 shadow-accent focus-visible:ring-4 focus-visible:ring-primary/30">
+        <div class="mt-9 flex flex-wrap gap-3">
+          <a href="/pages/contact.html" class="btn inline-flex items-center rounded-full bg-primary hover:bg-primary-press text-white font-semibold text-[15px] px-7 py-4 shadow-accent focus-visible:ring-4 focus-visible:ring-primary/30">
             무료 상담 신청
           </a>
-          <a href="tel:010-9013-0482" class="btn inline-flex items-center gap-2 rounded-full bg-white border border-hairline hover:border-primary text-primary-deep font-semibold px-6 py-3.5 focus-visible:ring-4 focus-visible:ring-primary/20">
+          <a href="tel:010-9013-0482" class="btn inline-flex items-center gap-2 rounded-full bg-white/80 border border-hairline-strong hover:border-primary hover:bg-white text-primary-deep font-semibold text-[15px] px-7 py-4 shadow-xs focus-visible:ring-4 focus-visible:ring-primary/20">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h2.28a1 1 0 01.95.68l1.5 4.5a1 1 0 01-.5 1.2l-2.26 1.13a11 11 0 005.52 5.52l1.13-2.26a1 1 0 011.2-.5l4.5 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.7 21 3 14.3 3 6z"/></svg>
             010-9013-0482
           </a>
         </div>
+        <dl class="mt-12 flex flex-wrap gap-x-10 gap-y-4 text-sm">
+          <div><dt class="text-ink-mute text-[13px]">본인부담금</dt><dd class="font-display font-bold text-lg text-ink">등급자 15%</dd></div>
+          <div class="hidden sm:block w-px bg-hairline-strong/60"></div>
+          <div><dt class="text-ink-mute text-[13px]">서비스 지역</dt><dd class="font-display font-bold text-lg text-ink">인천 3개 구</dd></div>
+          <div class="hidden sm:block w-px bg-hairline-strong/60"></div>
+          <div><dt class="text-ink-mute text-[13px]">인력 배정</dt><dd class="font-display font-bold text-lg text-ink">1:1 전담</dd></div>
+        </dl>
       </div>
     </div>
   </section>
 
   <!-- 빠른 안내 카드 -->
-  <section class="mx-auto max-w-6xl px-5 sm:px-6 -mt-10 sm:-mt-12 relative z-10">
-    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-      <a href="/pages/ltci-info.html" class="card-hover rounded-2xl bg-white border border-hairline p-6 shadow-card reveal">
-        <div class="h-11 w-11 rounded-xl bg-sage-light flex items-center justify-center text-primary-deep font-bold">01</div>
-        <p class="mt-4 font-display font-bold text-lg text-ink">노인장기요양보험</p>
-        <p class="mt-1.5 text-sm text-ink-mute">제도 안내와 등급 기준을 쉽게 정리했습니다.</p>
+  <section class="mx-auto max-w-6xl px-5 sm:px-6 -mt-16 sm:-mt-20 relative z-10">
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <a href="/pages/ltci-info.html" class="card-hover group rounded-3xl bg-white border border-hairline p-7 shadow-card reveal">
+        <span class="num-badge h-12 w-12 rounded-2xl inline-flex items-center justify-center font-display font-bold">01</span>
+        <p class="mt-5 font-display font-bold text-display-md text-ink">노인장기요양보험</p>
+        <p class="mt-2 text-[15px] leading-relaxed text-ink-mute">제도 안내와 등급 기준을 쉽게 정리했습니다.</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep transition-all group-hover:gap-2">바로가기 →</span>
       </a>
-      <a href="/pages/ltci-process.html" class="card-hover rounded-2xl bg-white border border-hairline p-6 shadow-card reveal">
-        <div class="h-11 w-11 rounded-xl bg-sage-light flex items-center justify-center text-primary-deep font-bold">02</div>
-        <p class="mt-4 font-display font-bold text-lg text-ink">장기요양 신청 절차</p>
-        <p class="mt-1.5 text-sm text-ink-mute">신청부터 서비스 이용까지 5단계로 안내합니다.</p>
+      <a href="/pages/ltci-process.html" class="card-hover group rounded-3xl bg-white border border-hairline p-7 shadow-card reveal d1">
+        <span class="num-badge h-12 w-12 rounded-2xl inline-flex items-center justify-center font-display font-bold">02</span>
+        <p class="mt-5 font-display font-bold text-display-md text-ink">장기요양 신청 절차</p>
+        <p class="mt-2 text-[15px] leading-relaxed text-ink-mute">신청부터 서비스 이용까지 5단계로 안내합니다.</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep transition-all group-hover:gap-2">바로가기 →</span>
       </a>
-      <a href="/pages/about.html" class="card-hover rounded-2xl bg-white border border-hairline p-6 shadow-card reveal">
-        <div class="h-11 w-11 rounded-xl bg-sage-light flex items-center justify-center text-primary-deep font-bold">03</div>
-        <p class="mt-4 font-display font-bold text-lg text-ink">센터 소개</p>
-        <p class="mt-1.5 text-sm text-ink-mute">위드케어가 어르신을 대하는 마음을 전합니다.</p>
+      <a href="/pages/about.html" class="card-hover group rounded-3xl bg-white border border-hairline p-7 shadow-card reveal d2">
+        <span class="num-badge h-12 w-12 rounded-2xl inline-flex items-center justify-center font-display font-bold">03</span>
+        <p class="mt-5 font-display font-bold text-display-md text-ink">센터 소개</p>
+        <p class="mt-2 text-[15px] leading-relaxed text-ink-mute">위드케어가 어르신을 대하는 마음을 전합니다.</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep transition-all group-hover:gap-2">바로가기 →</span>
       </a>
-      <a href="/pages/contact.html" class="card-hover rounded-2xl bg-primary text-white p-6 shadow-accent reveal">
-        <div class="h-11 w-11 rounded-xl bg-white/20 flex items-center justify-center font-bold">04</div>
-        <p class="mt-4 font-display font-bold text-lg">상담 신청</p>
-        <p class="mt-1.5 text-sm text-white/80">전화 또는 온라인으로 편하게 문의하세요.</p>
+      <a href="/pages/contact.html" class="card-hover group rounded-3xl bg-gradient-to-br from-primary to-primary-deep text-white p-7 shadow-accent reveal d3">
+        <span class="h-12 w-12 rounded-2xl bg-white/15 inline-flex items-center justify-center font-display font-bold ring-1 ring-white/20 !text-white">04</span>
+        <p class="mt-5 font-display font-bold text-display-md !text-white">상담 신청</p>
+        <p class="mt-2 text-[15px] leading-relaxed text-white/80">전화 또는 온라인으로 편하게 문의하세요.</p>
+        <span class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-white transition-all group-hover:gap-2">바로가기 →</span>
       </a>
     </div>
   </section>
 
-  <!-- 서비스 안내 -->
-  <section class="mx-auto max-w-6xl px-5 sm:px-6 py-20 sm:py-24">
-    <div class="text-center reveal">
-      <p class="text-sm font-semibold text-primary tracking-wide">SERVICE</p>
-      <h2 class="mt-2 text-2xl sm:text-3xl font-bold text-ink">위드케어의 방문 서비스</h2>
-      <p class="mt-3 text-ink-secondary">노인장기요양보험 등급을 받으신 어르신께 본인부담금 15%로 제공됩니다.</p>
-    </div>
-    <div class="mt-12 grid gap-6 md:grid-cols-3">
-      <div class="card-hover rounded-2xl border border-hairline bg-white overflow-hidden shadow-card reveal">
-        <div class="h-40 bg-gradient-to-br from-primary/15 to-accent/20 flex items-center justify-center">
-          <svg class="w-14 h-14 text-primary-deep" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10"/></svg>
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-bold text-xl text-ink">방문요양</h3>
-          <p class="mt-2 text-sm leading-relaxed text-ink-secondary">요양보호사가 가정을 방문해 신체활동·가사·정서 지원을 돕습니다.</p>
-          <a href="/pages/service-care.html" class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
-        </div>
+  <!-- 서비스 -->
+  <section class="section">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow">Service</span>
+        <h2 class="mt-3 text-display-lg font-bold text-ink">위드케어의 방문 서비스</h2>
+        <p class="lead mt-4">노인장기요양보험 등급을 받으신 어르신께 본인부담금 15%로 제공됩니다. (감경 대상·수급자 별도)</p>
       </div>
-      <div class="card-hover rounded-2xl border border-hairline bg-white overflow-hidden shadow-card reveal">
-        <div class="h-40 bg-gradient-to-br from-sage/20 to-sage-light flex items-center justify-center">
-          <svg class="w-14 h-14 text-sage-dark" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M6 12V7a3 3 0 016 0M4 12v3a5 5 0 005 5h6a5 5 0 005-5v-3"/></svg>
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-bold text-xl text-ink">방문목욕</h3>
-          <p class="mt-2 text-sm leading-relaxed text-ink-secondary">이동식 욕조를 갖춘 차량과 2인 이상 인력이 안전한 목욕을 지원합니다.</p>
-          <a href="/pages/service-bath.html" class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
-        </div>
-      </div>
-      <div class="card-hover rounded-2xl border border-hairline bg-white overflow-hidden shadow-card reveal">
-        <div class="h-40 bg-gradient-to-br from-accent/20 to-primary/10 flex items-center justify-center">
-          <svg class="w-14 h-14 text-primary-deep" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m4-4H8M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <div class="p-6">
-          <h3 class="font-display font-bold text-xl text-ink">방문간호</h3>
-          <p class="mt-2 text-sm leading-relaxed text-ink-secondary">간호사가 의사의 지시서에 따라 상처관리·투약 등 전문 간호를 제공합니다.</p>
-          <a href="/pages/service-nursing.html" class="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
-        </div>
+      <div class="mt-14 grid gap-6 md:grid-cols-3">
+        <article class="card-hover rounded-3xl border border-hairline bg-white overflow-hidden shadow-card reveal">
+          <div class="h-44 bg-gradient-to-br from-primary-100 via-primary-50 to-accent-soft/50 flex items-center justify-center">
+            <span class="icon-tile h-16 w-16 bg-white text-primary-deep">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l9-9 9 9M5 10v10h5v-6h4v6h5V10"/></svg>
+            </span>
+          </div>
+          <div class="p-7">
+            <h3 class="font-display font-bold text-display-md text-ink">방문요양</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed text-ink-secondary">요양보호사가 가정을 방문해 신체활동 · 가사 · 정서 지원을 돕습니다.</p>
+            <a href="/pages/service-care.html" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
+          </div>
+        </article>
+        <article class="card-hover rounded-3xl border border-hairline bg-white overflow-hidden shadow-card reveal d1">
+          <div class="h-44 bg-gradient-to-br from-sage-light via-sage-50 to-white flex items-center justify-center">
+            <span class="icon-tile h-16 w-16 bg-white text-sage-dark">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h16M6 12V7a3 3 0 016 0M4 12v3a5 5 0 005 5h6a5 5 0 005-5v-3"/></svg>
+            </span>
+          </div>
+          <div class="p-7">
+            <h3 class="font-display font-bold text-display-md text-ink">방문목욕</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed text-ink-secondary">이동식 욕조를 갖춘 차량과 2인 이상 인력이 안전한 목욕을 지원합니다.</p>
+            <a href="/pages/service-bath.html" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
+          </div>
+        </article>
+        <article class="card-hover rounded-3xl border border-hairline bg-white overflow-hidden shadow-card reveal d2">
+          <div class="h-44 bg-gradient-to-br from-accent-soft via-primary-50 to-white flex items-center justify-center">
+            <span class="icon-tile h-16 w-16 bg-white text-clay">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v8m4-4H8M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </span>
+          </div>
+          <div class="p-7">
+            <h3 class="font-display font-bold text-display-md text-ink">방문간호</h3>
+            <p class="mt-2.5 text-[15px] leading-relaxed text-ink-secondary">간호사가 의사의 지시서에 따라 상처관리 · 투약 등 전문 간호를 제공합니다.</p>
+            <a href="/pages/service-nursing.html" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">자세히 보기 →</a>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 
   <!-- 신뢰 지표 -->
-  <section class="bg-cream border-y border-hairline">
-    <div class="mx-auto max-w-6xl px-5 sm:px-6 py-14 grid gap-8 sm:grid-cols-3 text-center">
-      <div class="reveal">
-        <p class="font-display text-3xl font-bold text-primary-deep">15%</p>
-        <p class="mt-1 text-sm text-ink-secondary">장기요양 등급자 본인부담금<br>(감경 대상은 더 낮아집니다)</p>
-      </div>
-      <div class="reveal">
-        <p class="font-display text-3xl font-bold text-primary-deep">3개 구</p>
-        <p class="mt-1 text-sm text-ink-secondary">인천 계양구 · 서구 · 부평구<br>방문 서비스 제공</p>
-      </div>
-      <div class="reveal">
-        <p class="font-display text-3xl font-bold text-primary-deep">1:1 배정</p>
-        <p class="mt-1 text-sm text-ink-secondary">어르신 상태에 맞춘<br>전담 요양보호사 매칭</p>
+  <section class="bg-sage-wash border-y divider-soft">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 section-sm">
+      <div class="grid gap-10 md:grid-cols-3">
+        <div class="reveal border-l-2 border-primary/40 pl-5">
+          <p class="font-display text-display-lg font-bold text-primary-deep">15<span class="text-2xl align-top">%</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-secondary">장기요양 등급자 본인부담금<br><span class="text-ink-mute text-sm">감경 대상은 6~9%, 수급자는 무료</span></p>
+        </div>
+        <div class="reveal d1 border-l-2 border-sage/50 pl-5">
+          <p class="font-display text-display-lg font-bold text-sage-deep">3<span class="text-2xl">개 구</span></p>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-secondary">인천 계양구 · 서구 · 부평구<br><span class="text-ink-mute text-sm">인접 지역은 상담 시 확인</span></p>
+        </div>
+        <div class="reveal d2 border-l-2 border-accent/50 pl-5">
+          <p class="font-display text-display-lg font-bold text-accent-deep">1:1</p>
+          <p class="mt-2 text-[15px] leading-relaxed text-ink-secondary">어르신 상태에 맞춘 전담 배정<br><span class="text-ink-mute text-sm">교체 요청도 편하게</span></p>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- 이용 절차 미리보기 -->
+  <section class="bg-cream-soft border-b divider-soft">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 section">
+      <div class="max-w-2xl reveal">
+        <span class="eyebrow text-sage-dark">Process</span>
+        <h2 class="mt-3 text-display-lg font-bold text-ink">신청은 이렇게 진행됩니다</h2>
+        <p class="lead mt-4">등급이 없으셔도 괜찮습니다. 위드케어가 1단계부터 함께합니다.</p>
+      </div>
+      <ol class="mt-12 grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
+        <li class="reveal rounded-2xl bg-white border border-hairline p-5 shadow-xs">
+          <span class="num-badge h-9 w-9 rounded-xl inline-flex items-center justify-center text-sm font-display font-bold">1</span>
+          <p class="mt-3 font-semibold text-ink text-[15px]">인정 신청</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-ink-mute">건강보험공단에 신청</p>
+        </li>
+        <li class="reveal d1 rounded-2xl bg-white border border-hairline p-5 shadow-xs">
+          <span class="num-badge h-9 w-9 rounded-xl inline-flex items-center justify-center text-sm font-display font-bold">2</span>
+          <p class="mt-3 font-semibold text-ink text-[15px]">방문 조사</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-ink-mute">공단 직원 방문 조사</p>
+        </li>
+        <li class="reveal d2 rounded-2xl bg-white border border-hairline p-5 shadow-xs">
+          <span class="num-badge h-9 w-9 rounded-xl inline-flex items-center justify-center text-sm font-display font-bold">3</span>
+          <p class="mt-3 font-semibold text-ink text-[15px]">등급 판정</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-ink-mute">1~5등급 · 인지지원</p>
+        </li>
+        <li class="reveal d3 rounded-2xl bg-white border border-hairline p-5 shadow-xs">
+          <span class="num-badge h-9 w-9 rounded-xl inline-flex items-center justify-center text-sm font-display font-bold">4</span>
+          <p class="mt-3 font-semibold text-ink text-[15px]">인정서 수령</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-ink-mute">이용 한도액 확인</p>
+        </li>
+        <li class="reveal d3 rounded-2xl bg-gradient-to-br from-primary to-primary-deep text-white p-5 shadow-accent">
+          <span class="h-9 w-9 rounded-xl bg-white/15 ring-1 ring-white/20 inline-flex items-center justify-center text-sm font-display font-bold">5</span>
+          <p class="mt-3 font-semibold text-[15px]">서비스 시작</p>
+          <p class="mt-1 text-[13px] leading-relaxed text-white/80">계약 후 방문 시작</p>
+        </li>
+      </ol>
+      <div class="mt-8"><a href="/pages/ltci-process.html" class="inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">절차 자세히 보기 →</a></div>
+    </div>
+  </section>
+
   <!-- 상담 CTA + 위치 -->
-  <section class="mx-auto max-w-6xl px-5 sm:px-6 py-20">
-    <div class="grid gap-8 lg:grid-cols-2 items-stretch">
-      <div class="rounded-2xl page-hero text-white p-8 sm:p-10 flex flex-col justify-center reveal">
-        <h2 class="text-2xl sm:text-3xl font-bold">상담은 언제나 무료입니다</h2>
-        <p class="mt-3 text-cream/75 leading-relaxed">
+  <section class="mx-auto max-w-6xl px-5 sm:px-6 section">
+    <div class="grid gap-7 lg:grid-cols-2 items-stretch">
+      <div class="rounded-4xl page-hero text-white p-9 sm:p-11 flex flex-col justify-center reveal">
+        <span class="eyebrow text-accent-soft">Free Consulting</span>
+        <h2 class="mt-3 text-display-lg font-bold text-white">상담은 언제나 무료입니다</h2>
+        <p class="mt-4 text-cream/75 leading-relaxed text-[15px]">
           장기요양 등급이 없으셔도 괜찮습니다. 신청 방법부터 서비스 이용까지
           위드케어가 처음부터 끝까지 함께 안내해 드립니다.
         </p>
-        <div class="mt-7 flex flex-wrap gap-3">
-          <a href="/pages/contact.html" class="btn inline-flex items-center rounded-full bg-white text-primary-deep font-bold px-6 py-3.5 focus-visible:ring-4 focus-visible:ring-white/40">온라인 상담 신청</a>
-          <a href="tel:010-9013-0482" class="btn inline-flex items-center rounded-full border border-white/40 text-white font-semibold px-6 py-3.5 hover:bg-white/10">전화 010-9013-0482</a>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="/pages/contact.html" class="btn inline-flex items-center rounded-full bg-white text-primary-deep font-bold px-7 py-4 shadow-glow focus-visible:ring-4 focus-visible:ring-white/40">온라인 상담 신청</a>
+          <a href="tel:010-9013-0482" class="btn inline-flex items-center rounded-full border border-white/35 text-white font-semibold px-7 py-4 hover:bg-white/10">전화 010-9013-0482</a>
         </div>
       </div>
-      <div class="rounded-2xl border border-hairline bg-white p-8 shadow-card reveal">
-        <h3 class="font-display font-bold text-xl text-ink">오시는 길</h3>
-        <dl class="mt-4 space-y-3 text-sm">
-          <div class="flex gap-3"><dt class="w-16 flex-shrink-0 text-ink-mute">주소</dt><dd class="text-ink-secondary">인천 계양구 (상세 주소는 상담 시 안내)</dd></div>
-          <div class="flex gap-3"><dt class="w-16 flex-shrink-0 text-ink-mute">전화</dt><dd class="text-ink-secondary"><a href="tel:010-9013-0482" class="hover:text-primary">010-9013-0482</a></dd></div>
-          <div class="flex gap-3"><dt class="w-16 flex-shrink-0 text-ink-mute">이메일</dt><dd class="text-ink-secondary"><a href="mailto:jhanicm@naver.com" class="hover:text-primary">jhanicm@naver.com</a></dd></div>
-          <div class="flex gap-3"><dt class="w-16 flex-shrink-0 text-ink-mute">지역</dt><dd class="text-ink-secondary">인천 계양구 · 서구 · 부평구</dd></div>
+      <div class="rounded-4xl border border-hairline bg-white p-9 shadow-card reveal d1">
+        <span class="eyebrow text-clay">Location</span>
+        <h3 class="mt-3 font-display font-bold text-display-md text-ink">오시는 길</h3>
+        <dl class="mt-5 space-y-3.5 text-[15px]">
+          <div class="flex gap-4"><dt class="w-14 flex-shrink-0 text-ink-mute text-sm pt-0.5">주소</dt><dd class="text-ink-secondary">인천 계양구 <span class="text-ink-mute text-sm">(상세 주소는 상담 시 안내)</span></dd></div>
+          <div class="flex gap-4"><dt class="w-14 flex-shrink-0 text-ink-mute text-sm pt-0.5">전화</dt><dd class="text-ink-secondary"><a href="tel:010-9013-0482" class="font-semibold hover:text-primary-deep">010-9013-0482</a></dd></div>
+          <div class="flex gap-4"><dt class="w-14 flex-shrink-0 text-ink-mute text-sm pt-0.5">이메일</dt><dd class="text-ink-secondary"><a href="mailto:jhanicm@naver.com" class="hover:text-primary-deep">jhanicm@naver.com</a></dd></div>
+          <div class="flex gap-4"><dt class="w-14 flex-shrink-0 text-ink-mute text-sm pt-0.5">지역</dt><dd class="text-ink-secondary">인천 계양구 · 서구 · 부평구</dd></div>
         </dl>
-        <div class="mt-5 aspect-[16/10] rounded-xl bg-canvas-soft border border-hairline flex items-center justify-center text-sm text-ink-mute">
+        <div class="mt-6 aspect-[16/10] rounded-2xl bg-paper-cream border border-hairline flex items-center justify-center text-sm text-ink-mute">
           지도 영역 (배포 시 카카오맵/구글맵 임베드)
         </div>
-        <a href="/pages/location.html" class="mt-4 inline-flex text-sm font-semibold text-primary-deep hover:gap-2 gap-1 transition-all">위치 안내 페이지 →</a>
+        <a href="/pages/location.html" class="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary-deep hover:gap-2 transition-all">위치 안내 페이지 →</a>
       </div>
     </div>
   </section>
 
   <!-- 관련 기관 -->
-  <section class="border-t border-hairline bg-canvas-soft">
-    <div class="mx-auto max-w-6xl px-5 sm:px-6 py-10">
-      <p class="text-center text-xs font-semibold text-ink-mute tracking-wide">관련 기관</p>
-      <div class="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-ink-mute">
-        <a href="https://www.mohw.go.kr" target="_blank" rel="noopener" class="hover:text-primary">보건복지부</a>
-        <a href="https://www.longtermcare.or.kr" target="_blank" rel="noopener" class="hover:text-primary">국민건강보험 노인장기요양보험</a>
-        <a href="https://www.nhis.or.kr" target="_blank" rel="noopener" class="hover:text-primary">국민건강보험공단</a>
-        <a href="https://www.incheon.go.kr" target="_blank" rel="noopener" class="hover:text-primary">인천광역시</a>
+  <section class="bg-warm-wash border-t divider-soft">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 py-12">
+      <p class="text-center eyebrow text-ink-mute">Related</p>
+      <div class="mt-5 flex flex-wrap items-center justify-center gap-x-9 gap-y-3 text-[15px] text-ink-mute">
+        <a href="https://www.mohw.go.kr" target="_blank" rel="noopener" class="hover:text-primary-deep transition-colors">보건복지부</a>
+        <span class="text-hairline-strong">·</span>
+        <a href="https://www.longtermcare.or.kr" target="_blank" rel="noopener" class="hover:text-primary-deep transition-colors">국민건강보험 노인장기요양보험</a>
+        <span class="text-hairline-strong">·</span>
+        <a href="https://www.nhis.or.kr" target="_blank" rel="noopener" class="hover:text-primary-deep transition-colors">국민건강보험공단</a>
+        <span class="text-hairline-strong">·</span>
+        <a href="https://www.incheon.go.kr" target="_blank" rel="noopener" class="hover:text-primary-deep transition-colors">인천광역시</a>
       </div>
     </div>
   </section>
