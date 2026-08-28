@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>상담 관리 | 위드케어</title>
+<link rel="icon" href="/brand_logo/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="/js/tailwind-setup.js"></script>
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="bg-canvas-soft text-ink min-h-screen">
+
+<!-- 로그인 -->
+<div id="loginView" class="min-h-screen flex items-center justify-center px-5">
+  <form id="loginForm" class="w-full max-w-sm rounded-2xl border border-hairline bg-white p-8 shadow-card">
+    <div class="flex items-center gap-2.5">
+      <img src="/brand_logo/logo.svg" alt="" class="h-9 w-9 rounded-lg">
+      <span class="font-display font-bold text-primary text-lg">위드케어 관리</span>
+    </div>
+    <p class="mt-4 text-sm text-ink-secondary">관리자 비밀번호를 입력하세요.</p>
+    <input type="password" id="pw" class="field mt-3" placeholder="비밀번호" autocomplete="current-password" required>
+    <p id="loginError" class="hidden mt-2 text-sm text-red-600">비밀번호가 올바르지 않습니다.</p>
+    <button type="submit" class="btn mt-4 w-full rounded-full bg-primary hover:bg-primary-press text-white font-bold py-3">로그인</button>
+  </form>
+</div>
+
+<!-- 대시보드 -->
+<div id="dashView" class="hidden">
+  <header class="bg-white border-b border-hairline">
+    <div class="mx-auto max-w-6xl px-5 sm:px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="/brand_logo/logo.svg" alt="" class="h-8 w-8 rounded-lg">
+        <span class="font-display font-bold text-primary">상담 신청 관리</span>
+      </div>
+      <button id="logoutBtn" class="text-sm text-ink-mute hover:text-primary">로그아웃</button>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-6xl px-5 sm:px-6 py-8">
+    <div class="grid gap-4 sm:grid-cols-3">
+      <div class="rounded-xl border border-hairline bg-white p-5">
+        <p class="text-xs text-ink-mute">전체 신청</p>
+        <p id="statTotal" class="mt-1 font-display text-2xl font-bold text-ink">-</p>
+      </div>
+      <div class="rounded-xl border border-hairline bg-white p-5">
+        <p class="text-xs text-ink-mute">대기중</p>
+        <p id="statPending" class="mt-1 font-display text-2xl font-bold text-primary-deep">-</p>
+      </div>
+      <div class="rounded-xl border border-hairline bg-white p-5">
+        <p class="text-xs text-ink-mute">오늘 신청</p>
+        <p id="statToday" class="mt-1 font-display text-2xl font-bold text-ink">-</p>
+      </div>
+    </div>
+
+    <div id="listError" class="hidden mt-6 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm px-4 py-3"></div>
+
+    <div class="mt-6 overflow-x-auto rounded-xl border border-hairline bg-white">
+      <table class="w-full text-sm">
+        <thead class="bg-cream text-ink">
+          <tr>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">접수일</th>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">이름</th>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">연락처</th>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">등급</th>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">희망 서비스</th>
+            <th class="text-left px-4 py-3 font-semibold whitespace-nowrap">상태</th>
+            <th class="text-left px-4 py-3 font-semibold">상세</th>
+          </tr>
+        </thead>
+        <tbody id="rows" class="text-ink-secondary"></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+<!-- 상세 모달 -->
+<div id="detailModal" class="hidden fixed inset-0 z-50">
+  <div class="absolute inset-0 bg-ink/40" data-close></div>
+  <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[90%] max-w-lg rounded-2xl bg-white p-7 shadow-pop max-h-[85vh] overflow-y-auto">
+    <div class="flex items-center justify-between">
+      <h2 class="font-display font-bold text-lg text-ink">상담 신청 상세</h2>
+      <button data-close class="h-9 w-9 rounded-lg text-ink-mute hover:bg-canvas-soft">✕</button>
+    </div>
+    <dl id="detailBody" class="mt-4 space-y-3 text-sm"></dl>
+  </div>
+</div>
+
+<script>
+(function () {
+  var KEY = 'wc_admin_pw';
+  var loginView = document.getElementById('loginView');
+  var dashView = document.getElementById('dashView');
+  var pwInput = document.getElementById('pw');
+  var loginError = document.getElementById('loginError');
+  var listError = document.getElementById('listError');
+  var rowsEl = document.getElementById('rows');
+  var modal = document.getElementById('detailModal');
+  var cache = [];
+
+  function pw() { return sessionStorage.getItem(KEY) || ''; }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>]/g, function (c) { return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c]; }); }
+  function fmtDate(s) { var d = new Date(s); return isNaN(d) ? '-' : d.toLocaleString('ko-KR', { month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }); }
+
+  async function api(method, body) {
+    var opt = { method: method, headers: { 'x-admin-password': pw() } };
+    if (body) { opt.headers['Content-Type'] = 'application/json'; opt.body = JSON.stringify(body); }
+    var res = await fetch('/api/consultations', opt);
+    if (res.status === 401) { throw new Error('unauth'); }
+    if (!res.ok) { throw new Error('http ' + res.status); }
+    return res.json();
+  }
+
+  function render() {
+    document.getElementById('statTotal').textContent = cache.length;
+    document.getElementById('statPending').textContent = cache.filter(function (r) { return r.status !== 'done'; }).length;
+    var today = new Date().toDateString();
+    document.getElementById('statToday').textContent = cache.filter(function (r) { return new Date(r.created_at).toDateString() === today; }).length;
+
+    rowsEl.innerHTML = cache.map(function (r, i) {
+      var done = r.status === 'done';
+      return '<tr class="border-t border-hairline">' +
+        '<td class="px-4 py-3 whitespace-nowrap">' + fmtDate(r.created_at) + '</td>' +
+        '<td class="px-4 py-3 whitespace-nowrap font-medium text-ink">' + esc(r.name) + '</td>' +
+        '<td class="px-4 py-3 whitespace-nowrap">' + esc(r.phone) + '</td>' +
+        '<td class="px-4 py-3 whitespace-nowrap">' + esc(r.grade) + '</td>' +
+        '<td class="px-4 py-3 whitespace-nowrap">' + esc((r.services || []).join(', ') || '-') + '</td>' +
+        '<td class="px-4 py-3 whitespace-nowrap">' +
+          '<button data-toggle="' + i + '" class="rounded-full px-2.5 py-1 text-xs font-semibold ' +
+          (done ? 'bg-sage-light text-sage-dark' : 'bg-primary/10 text-primary-deep') + '">' +
+          (done ? '완료' : '대기중') + '</button>' +
+        '</td>' +
+        '<td class="px-4 py-3"><button data-detail="' + i + '" class="text-primary-deep hover:underline">보기</button></td>' +
+        '</tr>';
+    }).join('') || '<tr><td colspan="7" class="px-4 py-10 text-center text-ink-mute">신청 내역이 없습니다.</td></tr>';
+  }
+
+  async function load() {
+    listError.classList.add('hidden');
+    try {
+      cache = await api('GET');
+      if (!Array.isArray(cache)) cache = [];
+      render();
+    } catch (e) {
+      if (e.message === 'unauth') { logout(); return; }
+      listError.textContent = '목록을 불러오지 못했습니다. 서버 설정(환경변수)을 확인하세요.';
+      listError.classList.remove('hidden');
+    }
+  }
+
+  rowsEl.addEventListener('click', async function (e) {
+    var t = e.target.closest('[data-toggle]');
+    var d = e.target.closest('[data-detail]');
+    if (t) {
+      var row = cache[+t.dataset.toggle];
+      var next = row.status === 'done' ? 'pending' : 'done';
+      t.disabled = true;
+      try { await api('PATCH', { id: row.id, status: next }); row.status = next; render(); }
+      catch (err) { alert('상태 변경 실패'); }
+    }
+    if (d) {
+      var r = cache[+d.dataset.detail];
+      document.getElementById('detailBody').innerHTML = [
+        ['접수일', fmtDate(r.created_at)], ['이름', r.name], ['연락처', r.phone],
+        ['관계', r.relation], ['장기요양 등급', r.grade], ['거주 지역', r.area],
+        ['희망 서비스', (r.services || []).join(', ')], ['어르신 상태', r.condition],
+        ['추가 문의', r.message], ['상태', r.status === 'done' ? '완료' : '대기중'],
+      ].map(function (kv) {
+        return '<div><dt class="text-ink-mute">' + kv[0] + '</dt><dd class="mt-0.5 text-ink whitespace-pre-wrap">' + esc(kv[1] || '-') + '</dd></div>';
+      }).join('');
+      modal.classList.remove('hidden');
+    }
+  });
+
+  modal.addEventListener('click', function (e) { if (e.target.closest('[data-close]')) modal.classList.add('hidden'); });
+
+  function showDash() { loginView.classList.add('hidden'); dashView.classList.remove('hidden'); load(); }
+  function logout() { sessionStorage.removeItem(KEY); dashView.classList.add('hidden'); loginView.classList.remove('hidden'); }
+
+  document.getElementById('loginForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    loginError.classList.add('hidden');
+    sessionStorage.setItem(KEY, pwInput.value);
+    try { await api('GET'); showDash(); }
+    catch (err) { sessionStorage.removeItem(KEY); loginError.classList.remove('hidden'); }
+  });
+  document.getElementById('logoutBtn').addEventListener('click', logout);
+
+  if (pw()) showDash();
+})();
+</script>
+</body>
+</html>

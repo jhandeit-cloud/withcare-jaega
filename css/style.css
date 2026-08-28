@@ -1,0 +1,88 @@
+/* 위드케어 재가노인복지센터 — 공통 스타일 */
+
+html { scroll-behavior: smooth; overflow-x: hidden; }
+body {
+  font-family: 'Pretendard', 'Noto Sans KR', system-ui, sans-serif;
+  color: #3B2C21;
+  background: #FFFFFF;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+h1, h2, h3, .font-display {
+  font-family: 'Gowun Batang', 'Noto Serif KR', serif;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+p, li { word-break: keep-all; overflow-wrap: anywhere; }
+
+/* 버튼 상태 */
+.btn {
+  transition-property: transform, background-color, box-shadow, opacity;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(.22,.61,.36,1);
+}
+.btn:hover { transform: scale(1.02); }
+.btn:focus-visible { outline: none; }
+.btn:active { transform: scale(0.97); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* 카드 hover */
+.card-hover { transition: transform .25s cubic-bezier(.22,.61,.36,1), box-shadow .25s; }
+.card-hover:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(120,72,30,0.14), 0 4px 10px rgba(120,72,30,0.07); }
+
+/* 스크롤 등장 */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s cubic-bezier(.22,.61,.36,1), transform .7s cubic-bezier(.22,.61,.36,1); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+/* 히어로 그라디언트 메시 */
+.hero-mesh {
+  background-color: #FBF4E9;
+  background-image:
+    radial-gradient(38rem 38rem at 12% -10%, rgba(221,162,58,0.28), transparent 60%),
+    radial-gradient(32rem 32rem at 92% 8%, rgba(124,148,115,0.22), transparent 60%),
+    radial-gradient(30rem 30rem at 60% 100%, rgba(201,121,60,0.14), transparent 55%);
+}
+
+/* 서브페이지 상단 배너 */
+.page-hero {
+  background-color: #3B2C21;
+  background-image:
+    radial-gradient(30rem 30rem at 85% -20%, rgba(221,162,58,0.35), transparent 60%),
+    radial-gradient(26rem 26rem at 5% 120%, rgba(124,148,115,0.30), transparent 60%);
+}
+
+/* 점선 흐름 (절차 다이어그램) */
+.flow-line {
+  background-image: repeating-linear-gradient(to right, #C9793C 0 7px, transparent 7px 15px);
+  background-size: 22px 2px;
+  background-repeat: repeat-x;
+}
+
+/* 입력 필드 */
+.field {
+  width: 100%;
+  border: 1px solid #D7B78C;
+  border-radius: 0.75rem;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.95rem;
+  background: #fff;
+  transition: border-color .15s, box-shadow .15s;
+}
+.field:focus { outline: none; border-color: #C9793C; box-shadow: 0 0 0 4px rgba(201,121,60,0.15); }
+.field-invalid { border-color: #dc2626 !important; }
+.field-invalid:focus { box-shadow: 0 0 0 4px rgba(220,38,38,0.15) !important; }
+
+/* prose 스타일 (본문 콘텐츠) */
+.prose-w h2 { font-size: 1.6rem; margin: 2.2rem 0 1rem; color: #3B2C21; }
+.prose-w h3 { font-size: 1.2rem; margin: 1.6rem 0 0.6rem; color: #A85C3F; }
+.prose-w p { line-height: 1.9; color: #5B4534; margin-bottom: 1rem; }
+.prose-w ul { margin: 0.5rem 0 1.2rem; padding-left: 1.1rem; }
+.prose-w li { line-height: 1.9; color: #5B4534; list-style: disc; margin-bottom: 0.3rem; }
+.prose-w strong { color: #3B2C21; font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
