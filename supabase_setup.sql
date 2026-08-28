@@ -1,4 +1,4 @@
--- 위드케어 재가노인복지센터 - 상담 신청 테이블
+-- 정다운재가노인복지센터 - 상담 신청 테이블
 -- Supabase 대시보드 > SQL Editor 에서 한 번만 실행하세요.
 
 create table if not exists consultations (

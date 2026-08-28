@@ -1,4 +1,4 @@
-/* 위드케어 재가노인복지센터 — 공통 헤더/푸터/인터랙션 */
+/* 정다운재가노인복지센터 — 공통 헤더/푸터/인터랙션 */
 (function () {
   var C = window.SITE_CONFIG || {};
 
@@ -68,9 +68,9 @@
       '<div class="mx-auto max-w-6xl px-5 sm:px-6">' +
         '<div class="h-16 sm:h-[4.75rem] flex items-center justify-between gap-4">' +
           '<a href="/" class="flex items-center gap-2.5 flex-shrink-0">' +
-            '<img src="/brand_logo/logo.svg" alt="' + (C.centerShort || '위드케어') + ' 로고" class="h-10 w-10 rounded-2xl shadow-sm">' +
+            '<img src="/brand_logo/logo.svg" alt="' + (C.centerShort || '정다운') + ' 로고" class="h-10 w-10 rounded-2xl shadow-sm">' +
             '<span class="leading-tight">' +
-              '<span class="block font-display font-bold text-primary-deep text-lg">' + (C.centerShort || '위드케어') + '</span>' +
+              '<span class="block font-display font-bold text-primary-deep text-lg">' + (C.centerShort || '정다운') + '</span>' +
               '<span class="block text-[11px] tracking-[0.14em] text-ink-mute -mt-0.5">재가노인복지센터</span>' +
             '</span>' +
           '</a>' +
@@ -106,7 +106,7 @@
         '<div class="absolute inset-0 bg-ink/45 backdrop-blur-sm" data-close></div>' +
         '<div class="absolute right-0 top-0 h-full w-[84%] max-w-sm bg-paper shadow-pop overflow-y-auto">' +
           '<div class="flex items-center justify-between h-16 px-5 border-b border-hairline">' +
-            '<span class="font-display font-bold text-primary-deep">' + (C.centerShort || '위드케어') + '</span>' +
+            '<span class="font-display font-bold text-primary-deep">' + (C.centerShort || '정다운') + '</span>' +
             '<button type="button" data-close class="h-10 w-10 inline-flex items-center justify-center rounded-xl text-ink-secondary hover:bg-paper-cream" aria-label="메뉴 닫기">' +
               '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>' +
             '</button>' +
@@ -142,16 +142,18 @@
           '<div class="col-span-2 sm:col-span-3 md:col-span-1">' +
             '<div class="flex items-center gap-2.5">' +
               '<img src="/brand_logo/logo.svg" alt="" class="h-10 w-10 rounded-2xl">' +
-              '<span class="font-display font-bold text-white text-lg">' + (C.centerShort || '위드케어') + '</span>' +
+              '<span class="font-display font-bold text-white text-lg">' + (C.centerShort || '정다운') + '</span>' +
             '</div>' +
             '<p class="mt-4 text-sm leading-relaxed text-cream/55">사랑의 수고로<br>어르신이 행복한 세상을 함께 만들어 갑니다.</p>' +
           '</div>' +
           linkCols +
         '</div>' +
         '<div class="mt-12 pt-6 border-t border-white/10 text-[12.5px] leading-relaxed text-cream/50 space-y-1.5">' +
-          '<p><span class="text-cream/75 font-medium">' + (C.centerName || '') + '</span>　|　대표 ' + (C.rep || '') + '</p>' +
-          '<p>주소 : ' + (C.addressCity || '') + '　|　서비스 지역 : ' + areas + '</p>' +
-          '<p>TEL : <a href="' + (C.telHref || '#') + '" class="hover:text-white">' + (C.tel || '') + '</a>　|　E-MAIL : <a href="mailto:' + (C.email || '') + '" class="hover:text-white break-all">' + (C.email || '') + '</a></p>' +
+          '<p><span class="text-cream/75 font-medium">' + (C.centerName || '') + '</span>' + (C.rep ? '　|　대표 ' + C.rep : '') + '</p>' +
+          '<p>주소 : ' + (C.address || C.addressCity || '') + '　|　서비스 지역 : ' + areas + '</p>' +
+          '<p>TEL : <a href="' + (C.telHref || '#') + '" class="hover:text-white">' + (C.tel || '') + '</a>' +
+            (C.tel2 ? '　·　<a href="' + (C.tel2Href || '#') + '" class="hover:text-white">' + C.tel2 + '</a>' : '') +
+            '　|　E-MAIL : <a href="mailto:' + (C.email || '') + '" class="hover:text-white break-all">' + (C.email || '') + '</a></p>' +
           '<p class="pt-3 text-cream/35">COPYRIGHT © ' + (C.centerName || '') + '. ALL RIGHTS RESERVED.</p>' +
         '</div>' +
       '</div>'

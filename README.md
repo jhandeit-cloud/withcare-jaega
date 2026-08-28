@@ -1,4 +1,4 @@
-# 위드케어 재가노인복지센터 홈페이지
+# 정다운재가노인복지센터 홈페이지
 
 인천 계양구·서구·부평구 대상 재가노인복지센터 소개형 웹사이트.
 참고 사이트(`칠곡방문요양.com`)와 동일한 메뉴 구조를 현대적 반응형 디자인으로 재구성.
@@ -26,7 +26,7 @@ jaega_center/
 │   ├── site.js               공통 헤더/푸터/모바일메뉴
 │   └── tailwind-setup.js     공통 색상·폰트 설정
 ├── css/style.css             공통 스타일
-├── brand_logo/logo.svg       위드케어 로고 (home_page와 동일)
+├── brand_logo/logo.svg       정다운 로고 (home_page와 동일)
 ├── supabase_setup.sql        DB 테이블 생성 SQL
 └── serve.mjs                 로컬 미리보기 서버
 ```

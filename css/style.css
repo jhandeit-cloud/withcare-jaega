@@ -226,18 +226,12 @@ img, svg { max-width: 100%; }
 .icon-tile {
   position: relative;
   display: inline-flex; align-items: center; justify-content: center;
-  border-radius: 1rem;
+  border-radius: 0.9rem;
   box-shadow:
-    inset 0 0 0 1px rgba(122,69,38,0.08),
-    inset 0 1px 0 rgba(255,255,255,0.45),
-    0 5px 14px -8px rgba(122,69,38,0.18);
-  overflow: hidden;
+    inset 0 0 0 1px rgba(122,69,38,0.12),
+    0 6px 14px -8px rgba(122,69,38,0.28);
 }
-.icon-tile::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(158deg, rgba(255,255,255,0.5), rgba(255,255,255,0) 58%);
-}
-.icon-tile > * { position: relative; }
+.icon-tile > svg { stroke-width: 2.2; }
 
 /* 원형 아이콘 변형 */
 .icon-ring { border-radius: 999px; }
@@ -274,24 +268,30 @@ img, svg { max-width: 100%; }
 .field-invalid { border-color: #dc2626 !important; }
 .field-invalid:focus { box-shadow: 0 0 0 4px rgba(220,38,38,0.15) !important; }
 
-/* ---------- prose ---------- */
+/* ---------- prose ----------
+   :where() 로 감싸 특이도 0 유지 → .not-prose 안의 Tailwind 유틸(text-ink, mt-4 등)이 항상 이김 */
 .prose-w { max-width: 46rem; }
-.prose-w > p:first-of-type { font-size: 1.08rem; color: #5C4636; }
-.prose-w h2 {
+:where(.prose-w) > p:first-of-type { font-size: 1.08rem; }
+:where(.prose-w) h2 {
   font-size: clamp(1.4rem, 1.2rem + 1vw, 1.85rem);
   line-height: 1.32;
   margin: 2.4rem 0 0.9rem;
   padding-top: 1.5rem;
   border-top: 1px solid #ECDFCB;
+  color: #33241A;
 }
-.prose-w > div:first-child h2, .prose-w > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
-.prose-w h3 { font-size: 1.15rem; line-height: 1.4; margin: 1.7rem 0 0.55rem; color: #A85C3F; }
-.prose-w p { line-height: 1.85; color: #5C4636; margin-bottom: 1rem; }
-.prose-w ul { margin: 0.55rem 0 1.3rem; padding-left: 1.15rem; }
-.prose-w li { line-height: 1.85; color: #5C4636; list-style: disc; margin-bottom: 0.4rem; }
-.prose-w li::marker { color: #DDA23A; }
-.prose-w strong { color: #33241A; font-weight: 700; }
+:where(.prose-w) > div:first-child h2,
+:where(.prose-w) > h2:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+:where(.prose-w) h3 { font-size: 1.15rem; line-height: 1.4; margin: 1.7rem 0 0.55rem; color: #A85C3F; }
+:where(.prose-w) p { line-height: 1.85; color: #5C4636; margin-bottom: 1rem; }
+:where(.prose-w) ul { margin: 0.55rem 0 1.3rem; padding-left: 1.15rem; }
+:where(.prose-w) li { line-height: 1.85; color: #5C4636; list-style: disc; margin-bottom: 0.4rem; }
+:where(.prose-w) li::marker { color: #DDA23A; }
+:where(.prose-w) strong { color: #33241A; font-weight: 700; }
 .prose-w table { border-collapse: separate; border-spacing: 0; }
+/* .not-prose 블록은 prose 리스트 마커 제거 */
+.prose-w .not-prose ul { list-style: none; padding-left: 0; }
+.prose-w .not-prose li { list-style: none; }
 
 /* line-clamp 폴백 */
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
