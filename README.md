@@ -15,7 +15,6 @@ jaega_center/
 │   ├── ltci-process.html     노인장기요양보험 > 신청 절차
 │   ├── service-care.html     서비스안내 > 방문요양
 │   ├── service-bath.html     서비스안내 > 방문목욕
-│   ├── service-nursing.html  서비스안내 > 방문간호
 │   ├── notice.html           고객지원 > 공지사항
 │   ├── contact.html          고객지원 > 상담신청 (폼)
 │   └── gallery.html          갤러리

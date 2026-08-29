@@ -8,7 +8,7 @@ create table if not exists consultations (
   relation text,                            -- 어르신과의 관계
   grade text not null,                      -- 장기요양 등급 상태
   condition text not null,                  -- 어르신 현재 상태
-  services text[] not null default '{}',    -- 희망 서비스 (방문요양/방문목욕/방문간호)
+  services text[] not null default '{}',    -- 희망 서비스 (방문요양/방문목욕)
   area text,                                -- 거주 지역
   message text,                             -- 추가 문의사항
   status text not null default 'pending',   -- pending(대기중) / done(완료)

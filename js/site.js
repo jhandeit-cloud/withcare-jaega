@@ -14,7 +14,6 @@
     { label: '서비스안내', href: '/pages/service-care.html', children: [
       { label: '방문요양', href: '/pages/service-care.html' },
       { label: '방문목욕', href: '/pages/service-bath.html' },
-      { label: '방문간호', href: '/pages/service-nursing.html' },
     ]},
     { label: '고객지원', href: '/pages/notice.html', children: [
       { label: '공지사항', href: '/pages/notice.html' },
