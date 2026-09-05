@@ -11,7 +11,7 @@ window.SITE_CONFIG = {
   email: 'fluteokk@naver.com',
   address: '인천광역시 계양구 계양산로 15, 2층',
   addressCity: '인천 계양구',
-  serviceAreas: ['인천 계양구', '인천 서구', '인천 부평구'],
+  serviceAreas: ['전국'],
   // 지도 (구글 지도 임베드 — API 키 불필요)
   mapEmbed: 'https://www.google.com/maps?q=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B3%84%EC%96%91%EA%B5%AC%20%EA%B3%84%EC%96%91%EC%82%B0%EB%A1%9C%2015&z=17&hl=ko&output=embed',
   mapLink: 'https://www.google.com/maps/search/?api=1&query=%EC%9D%B8%EC%B2%9C%EA%B4%91%EC%97%AD%EC%8B%9C%20%EA%B3%84%EC%96%91%EA%B5%AC%20%EA%B3%84%EC%96%91%EC%82%B0%EB%A1%9C%2015',
