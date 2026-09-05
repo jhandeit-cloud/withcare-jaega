@@ -1,6 +1,6 @@
 # 정다운재가노인복지센터 홈페이지
 
-인천 계양구·서구·부평구 대상 재가노인복지센터 소개형 웹사이트.
+전국 대상 재가노인복지센터 소개형 웹사이트 (사무실: 인천광역시 계양구).
 참고 사이트(`칠곡방문요양.com`)와 동일한 메뉴 구조를 현대적 반응형 디자인으로 재구성.
 
 ## 폴더 구조
@@ -15,6 +15,8 @@ jaega_center/
 │   ├── ltci-process.html     노인장기요양보험 > 신청 절차
 │   ├── service-care.html     서비스안내 > 방문요양
 │   ├── service-bath.html     서비스안내 > 방문목욕
+│   ├── service-consult.html  서비스안내 > 방문상담
+│   ├── service-equipment.html 서비스안내 > 복지용구
 │   ├── notice.html           고객지원 > 공지사항
 │   ├── contact.html          고객지원 > 상담신청 (폼)
 │   └── gallery.html          갤러리
